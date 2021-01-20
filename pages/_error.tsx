@@ -1,57 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import * as Sentry from '@sentry/browser';
 import Link from 'next/link';
 import Router from 'next/router';
 
 import { P, Space, Row, Col } from '@src/component/atoms';
 
-Sentry.init({ dsn: process.env.SENTRY_DSN });
-
-/**
- * Send an error event to Sentry.
- *
- * Server-side:
- * Next.js captures SSR errors and never passes them to the Sentry
- * middleware. It does, however, render the _error.js component, so
- * we can manually fire Sentry events here.
- *
- * Client-side:
- * Unhandled client exceptions will always bubble up to the _error.js
- * component, so we can manually fire events here.
- */
-const notifySentry = (err, req, statusCode) => {
-  Sentry.configureScope((scope) => {
-    if (!req) {
-      scope.setTag(`ssr`, 'false');
-    } else {
-      scope.setTag(`ssr`, 'true');
-      scope.setExtra(`url`, req.url);
-      scope.setExtra(`params`, req.params);
-      scope.setExtra(`query`, req.query);
-      scope.setExtra(`statusCode`, statusCode);
-      scope.setExtra(`headers`, req.headers);
-
-      if (req.user) {
-        scope.setUser({ id: req.user.id, email: req.user.email });
-      }
-    }
-  });
-
-  Sentry.captureException(err);
-};
-
 const DATA = {
   404: {
     title: '죄송합니다. 현재 찾을 수 없는 페이지를 요청하셨습니다.',
     description:
-      '존재하지 않는 주소를 입력하셨거나,\n요청하신 페이지의 주소가 변경, 삭제되어 찾을 수 없습니다.\n궁금한 점이 있으시면 언제든 아래 번호로 문의해 주시기 바랍니다.'
+      '존재하지 않는 주소를 입력하셨거나,\n요청하신 페이지의 주소가 변경, 삭제되어 찾을 수 없습니다.\n궁금한 점이 있으시면 언제든 아래 번호로 문의해 주시기 바랍니다.',
   },
   500: {
     title: '시스템 장애가 발생했습니다.',
     description:
-      '지금 이 서비스와 연결할 수 없습니다.\n문제를 해결하기 위해 열심히 노력하고 있습니다.\n궁금한 점이 있으시면 언제든 아래 번호로 문의해 주시기 바랍니다.'
-  }
+      '지금 이 서비스와 연결할 수 없습니다.\n문제를 해결하기 위해 열심히 노력하고 있습니다.\n궁금한 점이 있으시면 언제든 아래 번호로 문의해 주시기 바랍니다.',
+  },
 };
 
 export type ErrorPageProps = {
@@ -155,8 +119,6 @@ ErrorPage.getInitialProps = async ({ req, res, err }) => {
     err?.response?.status || res?.statusCode || err?.code === 'ENOENT'
       ? 404
       : null;
-
-  notifySentry(err, req, statusCode);
 
   res.statusCode = statusCode;
   return { statusCode };

@@ -6,7 +6,6 @@ export { default as PostService } from './api/Post';
 export { default as LookService } from './api/Look';
 export { default as CommentService } from './api/Comment';
 export { default as BrandService } from './api/Brand/index';
-export { default as CartService } from './api/Cart';
 export { default as OrderItemService } from './api/OrderItem/index';
 export { default as OrderService } from './api/Order/index';
 export { default as WithdrawalService } from './api/Withdrawal/index';

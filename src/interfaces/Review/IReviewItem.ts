@@ -1,5 +1,3 @@
-import { RawDraftContentState } from 'draft-js';
-
 import { IItem } from '..';
 import { ItemTag, _StyleTag } from '@src/types';
 
@@ -18,7 +16,7 @@ export interface IReviewItem {
   updatedAt: string;
   item: IItem;
   itemTags: ItemTag[];
-  contents: RawDraftContentState;
+  contents: any;
 }
 
 export type IReviewItemInputDTO = Pick<

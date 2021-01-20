@@ -1,17 +1,9 @@
 import React from 'react';
-import styled, { createGlobalStyle, keyframes } from 'styled-components';
+import { createGlobalStyle, keyframes } from 'styled-components';
 import reset from 'styled-reset';
 import App from 'next/app';
 import Head from 'next/head';
-import Router from 'next/router';
 import { SWRConfig } from 'swr';
-
-import initGA from '../src/lib/ga';
-import TagManager from 'react-gtm-module';
-import * as Sentry from '@sentry/browser';
-
-import LogoHandIcon from '@src/asset/icons/common/logo/hand';
-import { P, Clickable, Space } from '../src/component/atoms';
 
 const snakbarAnimation = keyframes`
   0% { bottom: -6.4rem; }
@@ -162,46 +154,14 @@ body > div:nth-child(2) {
 
 `;
 
-const tagManagerArgs = {
-  gtmId: process.env.GTM_ID,
-};
-
-Sentry.init({
-  dsn: process.env.SENTRY_DSN,
-});
-
 class PickkApp extends App {
-  componentDidCatch(error, errorInfo) {
-    if (process.env.NODE_ENV === 'production') {
-      Sentry.withScope((scope) => {
-        Object.keys(errorInfo).forEach((key) => {
-          scope.setExtra(key, errorInfo[key]);
-        });
-
-        Sentry.captureException(error);
-      });
-    }
-
-    super.componentDidCatch(error, errorInfo);
-  }
-
   render() {
     const { Component, pageProps } = this.props;
 
     return (
       <>
         <Head>
-          <title>핔 - 당신의 패션 선택지</title>
-          <meta
-            name="naver-site-verification"
-            content="38191251ab7e3cd0cb4a0a4b8b6f76ee0f3c1f9e"
-            key="naver"
-          />
-          <meta
-            name="keywords"
-            content="핔사이트,픽사이트,깡스타일리스트,진진호,키작은광자,식스타일,호수,맨투맨,데님팬츠,니트,스니커,로맨틱무브,더니트컴퍼니,커스텀어클락,가먼트레이블,벨리에,수아레,낫앤낫,페이탈리즘,피스워커,모드나인,메종미네드,커렌트,페이브먼트,"
-          />
-          <meta name="author" content="핔 - 당신의 패션 선택지" />
+          <title>핔 select</title>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Head>
         <GlobalStyle />

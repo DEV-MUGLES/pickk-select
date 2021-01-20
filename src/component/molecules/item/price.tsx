@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import ItemMarkIcon from '@src/asset/icons/common/item-mark';
 import { P } from '../../atoms';
 import { SALE_RED, MIDDLE_GREY } from '../../atoms/colors';
 

@@ -1,7 +1,6 @@
 import React, { CSSProperties } from 'react';
 import styled from 'styled-components';
 
-import ItemThumbnailRating from './rating';
 import { Img, Row, P } from '@src/component/atoms';
 import { ImageSize } from '@src/component/atoms/Img';
 import { BLACK, SALE_RED, WHITE } from '@src/component/atoms/colors';
@@ -26,7 +25,6 @@ export default function ItemThumbnail({
   height,
   src,
   alt,
-  rating,
   pickk,
   style,
   rank,
@@ -58,7 +56,6 @@ export default function ItemThumbnail({
         circle={circle}
       />
       <TagWrapper>
-        {rating > 0 && <ItemThumbnailRating rating={rating} />}
         {pickk && (
           <PickkWrapper>
             <P level={2} fontWeight="bold" color={WHITE}>

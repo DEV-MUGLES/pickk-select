@@ -13,7 +13,6 @@ export * from './StyleTag';
 export * from './question';
 
 export * from './OrderItem';
-export * from './order';
 export * from './Points';
 export * from './ItemPoints';
 export * from './Withdrawal';
