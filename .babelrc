@@ -1,0 +1,104 @@
+{
+  "env": {
+    "development": {
+      "plugins": [
+        [
+          "@babel/plugin-proposal-decorators",
+          {
+            "legacy": true
+          }
+        ],
+        [
+          "@babel/plugin-proposal-class-properties",
+          {
+            "loose": true
+          }
+        ],
+        [
+          "babel-plugin-styled-components",
+          {
+            "ssr": true,
+            "displayName": true
+          }
+        ],
+        [
+          "module-resolver",
+          {
+            "root": ["./"],
+            "alias": {
+              "@src": "./src"
+            }
+          }
+        ]
+      ],
+      "presets": ["next/babel", "@zeit/next-typescript/babel"]
+    },
+    "production": {
+      "plugins": [
+        [
+          "@babel/plugin-proposal-decorators",
+          {
+            "legacy": true
+          }
+        ],
+        [
+          "@babel/plugin-proposal-class-properties",
+          {
+            "loose": true
+          }
+        ],
+        [
+          "babel-plugin-styled-components",
+          {
+            "ssr": true,
+            "displayName": true
+          }
+        ],
+        [
+          "module-resolver",
+          {
+            "root": ["./"],
+            "alias": {
+              "@src": "./src"
+            }
+          }
+        ]
+      ],
+      "presets": ["next/babel", "@zeit/next-typescript/babel"]
+    },
+    "test": {
+      "presets": ["@babel/env", "@babel/react"]
+    }
+  },
+  "plugins": [
+    [
+      "@babel/plugin-proposal-decorators",
+      {
+        "legacy": true
+      }
+    ],
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true
+      }
+    ],
+    [
+      "styled-components",
+      {
+        "ssr": true,
+        "displayName": true,
+        "preprocess": false
+      }
+    ],
+    [
+      "module-resolver",
+      {
+        "root": ["./"],
+        "alias": {
+          "@src": "./src"
+        }
+      }
+    ]
+  ]
+}
